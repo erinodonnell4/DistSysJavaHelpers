@@ -90,8 +90,8 @@ public class PreziReader extends TraceFileReaderFoundation {
 						fragments[13], preceedingJob, preceedingJob == null ? 0 : Long.parseLong(fragments[17]));
 			}
 
-		} catch (ArrayIndexOutOfBoundsException ex) {
-			// Incomplete line, ignore it
+		} //catch (ArrayIndexOutOfBoundsException ex) {
+			// Ignore
 		}
 		return null;
 	}
