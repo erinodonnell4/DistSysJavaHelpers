@@ -4,13 +4,13 @@ import java.lang.reflect.InvocationTargetException;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.Job;
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.file.TraceFileReaderFoundation;
 
-public class PreziReader extends TraceFileReaderFoundation {   
+public class EODTraceReader extends TraceFileReaderFoundation {   
 
 	TraceFileReaderFoundation TFRF;
 	
 	//NEEDS FIXED
 
-	public PreziReader(String fileName, int from, int to, boolean furtherjobs, Class<? extends Job> jobType)
+	public EODTraceReader(String fileName, int from, int to, boolean furtherjobs, Class<? extends Job> jobType)
 			throws SecurityException, NoSuchMethodException {
 		super("Grid workload format", fileName, from, to, furtherjobs, jobType);
 		// TODO Auto-generated constructor stub
