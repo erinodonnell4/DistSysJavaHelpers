@@ -7,6 +7,8 @@ import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.file.TraceFileReaderFoun
 public class PreziReader extends TraceFileReaderFoundation {   
 
 	TraceFileReaderFoundation TFRF;
+	
+	//NEEDS FIXED
 
 	public PreziReader(String fileName, int from, int to, boolean furtherjobs, Class<? extends Job> jobType)
 			throws SecurityException, NoSuchMethodException {
