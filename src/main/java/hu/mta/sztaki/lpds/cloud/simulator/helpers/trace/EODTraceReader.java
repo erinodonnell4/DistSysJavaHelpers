@@ -66,24 +66,24 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 			
 			protected boolean isTraceLine(String line) throws ArrayIndexOutOfBoundsException {
 				
-				String[] lineData; // Instantiate string array.
+				String[] lineData; // string array.
 				
 				// Check if the line argument is null.
 				if(line != null) {
-					// Not null, add its contents to the array.
+					// If Not null, add to the array.
 					lineData = line.split(" ");
 				} else {
-					// Line is null, invalid.
+					// invalid.
 					return false;
 				}
 				
 				// Catch invalid lines with ArrayIndexOutOfBoundsException
 				try {
-					// Check for Job Arrival Time Integer
+					// Check for Job Arrival Timings 
 					try {
 						Integer.parseInt(lineData[0]);
 					} catch (NumberFormatException e) {
-						// Data can't be parsed as an integer, data line contains incorrect data.
+						
 						return false;
 					}
 					
@@ -95,17 +95,17 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 						return false;
 					}
 					
-					// Check for Job ID String ( Not Whitespace )
+					// Job ID String
 					if(lineData[2].isEmpty()) {
 						
 						return false;
 					}
 					
-					// Check for Job Executable String ( "url", "default" or "export" )
+					// Check for Job Exec String
 					if(!lineData[3].isEmpty()) {
 						// Not blank
 						if(!lineData[3].equals("url") && !lineData[3].equals("default") && !lineData[3].equals("export")) {
-							// Doesn't equal any of the specified job executable types
+							// Does not match any job types.
 							return false;
 						}
 					} else {
@@ -113,11 +113,11 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 						return false;
 					}
 					
-					// Passed all of the checks, return true.
+					// If all checks are passed then return true.
 					return true;
 					
 				} catch(ArrayIndexOutOfBoundsException e) {
-					// Incorrect amount of arguments.
+					
 					return false;
 				}
 				
