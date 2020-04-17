@@ -28,6 +28,7 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 		final String[] lineData = line.split(" "); 
 		try {
 			
+			// Declare 
 			
 			int jobState = Integer.parseInt(lineData[0]);   //job id string
 			int procs = 1; 								   // allocated processors
@@ -117,7 +118,7 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 					return true;
 					
 				} catch(ArrayIndexOutOfBoundsException e) {
-					// If checks are not passed - return False.
+					// If checks are failed - return False.
 					return false;
 				}
 				
