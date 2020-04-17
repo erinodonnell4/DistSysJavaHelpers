@@ -1,6 +1,7 @@
 package hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.file;
 
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.Job;
+
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.file.TraceFileReaderFoundation;
 
 
@@ -17,7 +18,7 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 		super("log Format", fileName, from, to, furtherjobs, jobType);
 	}
 	
-	//Create Job
+	//Creating Jobs
 
 	protected Job createJobFromLine(String job)
 	
@@ -32,7 +33,7 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 			int procs = 1; 								   // allocated processors
 			long submit = Long.parseLong(lineData[1]);    // submit time in seconds
 			long waitTime = 0; 							 // waiting time in seconds
-			long runTime = Long.parseLong(lineData[3]); // running time in seconds
+			long runTime = 400; // running time in seconds
 			String user = null; 					   // userID
 			String group = null;                      // groupID
 			String exec = null;                      // execID
@@ -49,7 +50,7 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 				
 				}
 			
-		}
+		} 		// Catch invalid lines with ArrayIndexOutOfBoundsException
 				catch (ArrayIndexOutOfBoundsException e) {
 					// Line is null
 				return null;
@@ -58,22 +59,20 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 				
 		}
 			
-			
 			protected void metaDataCollector(String data) {
 			
 			}
-
-			
+	
 			protected boolean isTraceLine(String line) throws ArrayIndexOutOfBoundsException {
 				
 				String[] lineData; // string array.
 				
-				// Check if the line argument is null.
+				// Check if the line is null.
 				if(line != null) {
-					// If Not null, add to the array.
+					// If Not null,  proceed to add to array.
 					lineData = line.split(" ");
 				} else {
-					// invalid.
+					// if invalid.
 					return false;
 				}
 				
@@ -87,11 +86,12 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 						return false;
 					}
 					
-					// Check for Job Duration Float
+					// Check for Job Duration
 					try {
 						Float.parseFloat(lineData[1]);
 					} catch (NumberFormatException e) {
-						// Data can't be parsed as a float, data line contains incorrect data.
+					}
+						// If line contains any incorrect Data.
 						return false;
 					}
 					
@@ -101,11 +101,11 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 						return false;
 					}
 					
-					// Check for Job Exec String
+					// Check for Job Exec 
 					if(!lineData[3].isEmpty()) {
-						// Not blank
+						//  If Not empty
 						if(!lineData[3].equals("url") && !lineData[3].equals("default") && !lineData[3].equals("export")) {
-							// Does not match any job types.
+							// Does not match any job types listed (url, default, export) Returning FALSE.
 							return false;
 						}
 					} else {
@@ -117,7 +117,7 @@ public class EODTraceReader extends TraceFileReaderFoundation {
 					return true;
 					
 				} catch(ArrayIndexOutOfBoundsException e) {
-					
+					// If checks are not passed - return False.
 					return false;
 				}
 				
